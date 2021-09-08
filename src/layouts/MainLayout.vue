@@ -12,7 +12,9 @@
         />
 
         <q-toolbar-title>Poker Dashboard</q-toolbar-title>
-        <q-btn color="secondary" label="Start New Game" />
+        <router-link v-slot="{ navigate }" to="/newGame" custom>
+          <q-btn color="secondary" label="Start New Game" @click="navigate" />
+        </router-link>
       </q-toolbar>
     </q-header>
 
