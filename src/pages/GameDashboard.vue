@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page padding>
     <div class="flex justify-center items-start items-stretch">
       <q-card class="q-ma-xs" style="width: 330px">
         <q-card-section>
