@@ -24,7 +24,7 @@
       </q-card>
       <div style="display: grid">
         <q-card class="q-ma-xs self-stretch">
-          <q-card-section class="text-h5 text-center">
+          <q-card-section class="text-h5 text-center text-white bg-primary">
             Big Blind
           </q-card-section>
           <q-card-section class="text-h1 text-center text-weight-bold">
@@ -32,7 +32,7 @@
           </q-card-section>
         </q-card>
         <q-card class="q-ma-xs self-stretch">
-          <q-card-section class="text-h5 text-center">
+          <q-card-section class="text-h5 text-center text-white bg-primary">
             Small Blind
           </q-card-section>
           <q-card-section class="text-h1 text-center text-weight-bold">
@@ -41,10 +41,10 @@
         </q-card>
       </div>
       <q-card class="q-ma-xs" style="width: 330px">
-        <q-card-section class="text-h5 text-center"> High Hand </q-card-section>
-        <q-card-section
-          class="text-primary text-h3 text-center text-weight-bold"
-        >
+        <q-card-section class="text-h5 text-center text-white bg-primary">
+          High Hand
+        </q-card-section>
+        <q-card-section class="text-h3 text-center text-weight-bold">
           Four of a kind
         </q-card-section>
         <q-card-section class="text-h4 text-center"> Jack High </q-card-section>
