@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import store from "../store/store.js";
+import store from "src/store/store.js";
 
 export default {
   setup() {

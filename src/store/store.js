@@ -32,9 +32,7 @@ const getters = {
     }
 }
 
-const store = {
+export default {
     state: readonly(state),
     getters,
 };
-
-export default store;

@@ -67,7 +67,7 @@
 
 <script>
 import BaseTimer from "components/BaseTimer.vue";
-import store from "../store/store.js";
+import store from "src/store/store.js";
 
 export default {
   components: {

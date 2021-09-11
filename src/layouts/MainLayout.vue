@@ -77,7 +77,7 @@
 
 <script>
 import { defineComponent, ref, computed } from "vue";
-import store from "../store/store.js";
+import store from "src/store/store.js";
 import constants from "components/constants.js";
 
 export default defineComponent({
