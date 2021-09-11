@@ -31,11 +31,8 @@
             <q-item-label header>Players</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable>
-          <q-item-section>Glenda</q-item-section>
-        </q-item>
-        <q-item clickable>
-          <q-item-section>Bryan</q-item-section>
+        <q-item v-for="(player, index) in players" :key="index" clickable>
+          <q-item-section>{{ player.name }}</q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
@@ -53,35 +50,13 @@
             <q-item-label header>Hand rankings</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item>
-          <q-item-section>Royal flush</q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>Straight flush</q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>Four of a kind</q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>Full house</q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>Flush</q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>Straight</q-item-section>
-        </q-item>
-        <q-item :active="true" active-class="high-hand">
-          <q-item-section>Three of a kind</q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>Two pair</q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>Pair</q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section>High card</q-item-section>
+        <q-item
+          v-for="(hand, index) in pokerHandRankings"
+          :key="index"
+          :active="index == highHand.pokerHandIndex"
+          :class="{ 'high-hand': index == highHand.pokerHandIndex }"
+        >
+          <q-item-section>{{ hand }}</q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
@@ -102,6 +77,8 @@
 
 <script>
 import { defineComponent, ref, computed } from "vue";
+import store from "../store/store.js";
+import constants from "components/constants.js";
 
 export default defineComponent({
   name: "MainLayout",
@@ -115,6 +92,9 @@ export default defineComponent({
       return rightDrawerOpen.value ? "chevron_right" : "chevron_left";
     });
 
+    const { players, highHand } = store.state;
+    const { pokerHandRankings } = constants;
+
     return {
       leftDrawerOpen,
       rightDrawerOpen,
@@ -125,6 +105,9 @@ export default defineComponent({
       toggleRightDrawer() {
         rightDrawerOpen.value = !rightDrawerOpen.value;
       },
+      players,
+      highHand,
+      pokerHandRankings,
     };
   },
 });

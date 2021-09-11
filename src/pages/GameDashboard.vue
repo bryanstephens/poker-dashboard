@@ -28,7 +28,7 @@
             Big Blind
           </q-card-section>
           <q-card-section class="text-h1 text-center text-weight-bold">
-            1280
+            {{ bigBlind }}
           </q-card-section>
         </q-card>
         <q-card class="q-ma-xs self-stretch">
@@ -36,7 +36,7 @@
             Small Blind
           </q-card-section>
           <q-card-section class="text-h1 text-center text-weight-bold">
-            640
+            {{ smallBlind }}
           </q-card-section>
         </q-card>
       </div>
@@ -45,11 +45,17 @@
           High Hand
         </q-card-section>
         <q-card-section class="text-h3 text-center text-weight-bold">
-          Four of a kind
+          {{ highHand.title }}
         </q-card-section>
-        <q-card-section class="text-h4 text-center"> Jack High </q-card-section>
-        <q-card-section class="text-center text-h4 text-accent">
-          Bryan
+        <q-card-section class="text-h4 text-center">
+          {{ highHand.qualifier }}
+        </q-card-section>
+        <q-card-section
+          v-for="(player, index) in highHand.players"
+          :key="index"
+          class="text-center text-h4 text-accent"
+        >
+          {{ player }}
         </q-card-section>
       </q-card>
     </div>
@@ -61,10 +67,20 @@
 
 <script>
 import BaseTimer from "components/BaseTimer.vue";
+import store from "../store/store.js";
 
 export default {
   components: {
     BaseTimer,
+  },
+  setup() {
+    const { highHand, bigBlind, smallBlind } = store.state;
+
+    return {
+      highHand,
+      bigBlind,
+      smallBlind,
+    };
   },
 };
 </script>

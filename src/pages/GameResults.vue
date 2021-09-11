@@ -6,21 +6,9 @@
         Players
       </q-card-section>
       <q-list>
-        <q-item>
-          <q-item-section> Bryan </q-item-section>
-          <q-item-section side> 1st </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section> Glenda </q-item-section>
-          <q-item-section side> 2nd </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section> Will </q-item-section>
-          <q-item-section side> 3rd </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section> Mike </q-item-section>
-          <q-item-section side> 4th </q-item-section>
+        <q-item v-for="(player, index) in players" :key="index">
+          <q-item-section> {{ player.name }} </q-item-section>
+          <q-item-section side> {{ player.rank }} </q-item-section>
         </q-item>
       </q-list>
     </q-card>
@@ -30,11 +18,15 @@
           High Hand
         </q-card-section>
         <q-card-section class="text-h4 text-center text-weight-bold">
-          Four of a kind
+          {{ highHand.title }}
         </q-card-section>
         <q-card-section class="text-h5 text-center"> Jack High </q-card-section>
-        <q-card-section class="text-center text-h4 text-accent">
-          Bryan
+        <q-card-section
+          v-for="(player, index) in highHand.players"
+          :key="index"
+          class="text-center text-h4 text-accent"
+        >
+          {{ player }}
         </q-card-section>
       </q-card>
     </div>
@@ -43,8 +35,12 @@
         <q-card-section class="text-h5 bg-primary text-center text-white">
           First Four of a Kind
         </q-card-section>
-        <q-card-section class="text-h4 text-center text-weight-bold">
-          Paolo
+        <q-card-section
+          v-for="(player, index) in firstFourOfAKind.players"
+          :key="index"
+          class="text-h4 text-center text-weight-bold"
+        >
+          {{ player }}
         </q-card-section>
       </q-card>
       <q-card>
@@ -60,5 +56,20 @@
 </template>
 
 <script>
-export default {};
+import store from "../store/store.js";
+
+export default {
+  setup() {
+    const { highHand, firstFourOfAKind, players } = store.state;
+    const { getPlayers } = store.getters;
+
+    return {
+      highHand,
+      firstFourOfAKind,
+      players: getPlayers().sort((player1, player2) => {
+        return player1.timeOut - player2.timeOut;
+      }),
+    };
+  },
+};
 </script>
