@@ -74,9 +74,13 @@
 
 <script>
 import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
+import store from "src/store";
+import moment from "moment";
 
 export default {
   setup() {
+    const router = useRouter();
     const time = ref("00:30");
     const smallBlind = ref(5);
     let lastGoodSmallBlind = 5;
@@ -84,6 +88,13 @@ export default {
     let lastGoodBigBlind = 5;
     const playerToAdd = ref("");
     const playerList = reactive([]);
+    const {
+      setPlayers,
+      setSmallBlind,
+      setBigBlind,
+      setTimerDuration,
+      setStartTime,
+    } = store.mutations;
 
     const handleSmallBlindChange = function (newVal) {
       if (newVal > lastGoodSmallBlind) {
@@ -106,7 +117,12 @@ export default {
     };
 
     const addPlayer = function (newPlayer) {
-      if (newPlayer) {
+      const playerExists =
+        newPlayer.trim() === "" ||
+        playerList.filter((player) => {
+          return player.toLowerCase() === newPlayer.toLowerCase();
+        }).length > 0;
+      if (!playerExists) {
         playerList.push(newPlayer);
       }
       playerToAdd.value = "";
@@ -116,7 +132,16 @@ export default {
       playerList.splice(index, 1);
     };
 
-    const startGame = function () {};
+    const startGame = function () {
+      setPlayers(playerList);
+      setSmallBlind(smallBlind);
+      setBigBlind(bigBlind);
+      setTimerDuration(
+        moment.duration(moment(time.value, "HH:mm").format("HH:mm")).asMinutes()
+      );
+      setStartTime(moment.now());
+      router.push("/game");
+    };
 
     return {
       time,
